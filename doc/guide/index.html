@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>kcopy</title>
+    <link rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com-prettify.css">
+    <link rel="stylesheet" href="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com.css">
+    <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.staticfile.org/prettify/r298/prettify.min.js"></script>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.8/seed-min.js" data-config="{combine:true}"></script>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <div id="header"><a href="http://docs.kissyui.com/" class="logo">kissy</a>
+      <nav><a href="http://docs.kissyui.com/1.4/docs/html/coms.html">优秀组件推荐</a></nav>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar">
+          <ul data-spy="affix" data-offset-top="0" class="nav nav-list bs-docs-sidenav"></ul>
+        </div>
+        <div class="span9 bs-docs-content">
+          <h1 data-id="undefined" class="title">kcopy</h1>
+          <p class="author-wrapper"><span>组件有问题？旺旺联系作者：</span><a href="https://github.com/letao" target="_blank" data-name="东皋" class="author"><img src="https://avatars.githubusercontent.com/u/8624730?v=2&amp;s=60" alt="东皋"></a><span class="author-name">东皋</span>
+          </p>
+          <div class="common-link"><a href="../demo/index.html" target="_blank" class="demo">示例</a><a href="https://github.com/kissygalleryteam/kcopy" target="_blank" class="source">源码</a></div>
+          <p class="com-info"><span class="info-label">View</span><span data-com="kcopy" class="J_View">363</span></p>
+          <p class="com-info"><span class="info-label">所属分类</span><a href="http://kpm.taobao.net/list/框架&amp;工具">框架&amp;工具</a>
+          </p>
+          <p class="com-info"><span class="info-label">kissy版本</span><span>1.4.X</span>
+          </p><h2 id="kcopy">kcopy</h2>
+<ul>
+<li>版本：2.0.0</li>
+<li>教程：<a href="http://kg.kissyui.com/kcopy/2.0.0/guide/index.html">http://kg.kissyui.com/kcopy/2.0.0/guide/index.html</a></li>
+<li>demo：<a href="http://kg.kissyui.com/kcopy/2.0.0/demo/index.html">http://kg.kissyui.com/kcopy/2.0.0/demo/index.html</a></li>
+</ul>
+<h2 id="-">组件说明</h2>
+<ul>
+<li>1、组件非原创，由ZeroClipboard.js改写而来</li>
+<li>2、由于ZeroClipboard.swf回调JS函数时，使用了ZeroClipboard命名空间，故组件中保留<code>window[&quot;ZeroClipboard&quot;] = Kcopy</code></li>
+<li>3、由于第二点，故Kcopy与ZeroClipboard不能同时使用</li>
+<li>4、保留了大部分ZeroClipboard原型，使用方法基本一致</li>
+</ul>
+<h2 id="-">配置说明</h2>
+<ul>
+<li>@param element{#id|node} 组件初始化将绑定复制功能的元素（一般为按钮，也可以是其他节点）</li>
+<li>@param options{Object} 组件其他配置项<ul>
+<li>@property moviePath{String} 用于实现复制到剪切板功能的swf文件地址，为避免跨域问题，应尽可能使用同域地址</li>
+<li>@property trustedOrigins{String} 可靠的源，一般使用默认值</li>
+<li>@property text{String} 将被复制的内容</li>
+<li>@property hoverClass{String} 按钮hover样式</li>
+<li>@property activeClass{String} 按钮按下样式</li>
+<li>@property allowScriptAccess{String} 允许swf文件执行脚本，可选值：<code>never</code>、<code>always</code>、<code>someDomain</code>，默认值<code>someDomain</code></li>
+<li>@property useNoCache{Boolean} 是否使用缓存</li>
+<li>@property forceHandCursor{Boolean} 是否启用鼠标手型</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">组件方法</h2>
+<ul>
+<li><p>setCurrent(ele)：设置当前的控制器</p>
+<pre><code>  kcopy.setCurrent(S.one(&quot;#KC-Button&quot;));
+</code></pre></li>
+<li><p>setSize(width, height)：设置flash覆盖范围</p>
+<pre><code>  kcopy.setSize(15, 15);
+</code></pre></li>
+<li><p>setTitle(text)：设置鼠标移入按钮时的提示文案</p>
+<pre><code>  kcopy.setTitle(&quot;点击复制卡号&quot;);
+</code></pre></li>
+<li><p>setText(text)： 设置点击被复制到剪贴板的内容（常用）</p>
+<pre><code>  kcopy.setText(&quot;ZHANGSAN&quot;);
+</code></pre></li>
+<li><p>on/off(eventName, fn)：注册和注销事件，可选事件：<code>load</code>、<code>mouseover</code>、<code>mouseout</code>、<code>mousedown</code>、<code>mouseup</code>、<code>datarequested</code>、<code>complete</code></p>
+<pre><code>  kcopy.on(&quot;complete&quot;, function(client, args){
+      alert(&quot;复制【&quot; + args.text + &quot;】成功&quot;);
+  });
+</code></pre></li>
+<li><p>setHandCursor(bool)：设置鼠标手势</p>
+<pre><code>  kcopy.setHandCursor(true);
+</code></pre></li>
+</ul>
+<h2 id="-">使用示例</h2>
+<p>HTML结构如下：</p>
+<pre><code>&lt;h2&gt;KISSY版ZeroClipboard&lt;/h2&gt;
+&lt;p&gt;
+    卡号：&lt;input type=&quot;text&quot; id=&quot;KC-Test&quot; class=&quot;J_Text&quot; value=&quot;Default String.&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;复制&quot; id=&quot;KC-Button&quot; class=&quot;KC-Button&quot; title=&quot;点击复制&quot;&gt;
+&lt;/p&gt;
+&lt;p&gt;
+    卡密：&lt;input type=&quot;text&quot; id=&quot;KC-Test-Two&quot; class=&quot;J_Text&quot; value=&quot;Second String.&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;复制&quot; id=&quot;KC-Button-Two&quot; class=&quot;KC-Button&quot; title=&quot;点击复制&quot;&gt;
+&lt;/p&gt;
+&lt;h2&gt;复制记录&lt;/h2&gt;
+&lt;ul id=&quot;CopyRecord&quot;&gt;&lt;/ul&gt;
+&lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot; class=&quot;J_Check&quot;&gt;
+    在此textarea中粘贴(Ctrl+C/鼠标右键)，以检查内容复制是否正确。
+&lt;/textarea&gt;
+</code></pre><p>示例脚本：</p>
+<pre><code>S.one(&quot;.J_Check&quot;).on(&quot;focus&quot;, function(e){
+    S.one(&quot;.J_Check&quot;).val(&quot;&quot;);
+});
+
+var record = S.one(&quot;#CopyRecord&quot;);
+var copyinp = S.one(&quot;#KC-Test&quot;);
+S.use(&#39;kg/kcopy/2.0.0/index&#39;, function (S, Kcopy) {
+    var kcopy = new Kcopy(&quot;#KC-Button&quot;, {
+        moviePath: &quot;./zeroclipboard/ZeroClipboard.swf&quot;,
+        forceHandCursor: false,
+        allowScriptAccess: &quot;always&quot;
+    });
+
+    S.all(&quot;.KC-Button&quot;).on(&quot;mouseover&quot;, function(e){
+        kcopy.setCurrent(S.one(this));
+        copyinp = S.one(this).parent(&quot;p&quot;).one(&quot;.J_Text&quot;);
+        kcopy.setText(copyinp.val());
+    });
+
+    kcopy.on(&quot;complete&quot;, function(client, args){
+        var clds = record.children();
+        if (clds.length &gt; 0) {
+            S.one(&#39;&lt;li class=&quot;item&quot;&gt;最新复制内容为：&#39; + args.text + &#39;&lt;/li&gt;&#39;).insertBefore(clds[0]);
+        } else {
+            record.append(&#39;&lt;li class=&quot;item&quot;&gt;复制内容为：&#39; + args.text + &#39;&lt;/li&gt;&#39;);
+        }
+        var newStr = new Date().getTime().toString().substr(0, Math.random() * 7 + 1);
+        copyinp.val(newStr);
+        kcopy.setText(newStr);
+    });
+});
+</code></pre><h2 id="changelog">changelog</h2>
+<h3 id="20132-0-04">20132.0.04</h3>
+<ul>
+<li>版本移植，提供可用demo</li>
+</ul>
+
+          <div style="display:none;"><script type="text/javascript" src="http://tajs.qq.com/stats?sId=36378479" charset="UTF-8"></script></div>
+          <script src="http://docs.kissyui.com/1.4/source/guideline/templates/assets/com.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
